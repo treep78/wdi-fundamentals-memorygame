@@ -1,25 +1,60 @@
 //Card Values
-var numOfCards = 4;
-var cardList = [];
+var cards = ['queen','queen','king','king'];
+var cardsInPlay = [];
 var gameBoard = document.getElementById("game-board");
 
-function setupCards(nOC)
+function createBoard(nOC)
 {
 	for(var i = 0;i<nOC; i++)
 	{
 		var newDiv = document.createElement('div');
 		newDiv.className="card";
-		cardList.push(newDiv);
+		newDiv.setAttribute('data-card', cards[i]);
+		newDiv.addEventListener('click', isTwoCards);
 		document.getElementById("game-board").appendChild(newDiv);
 	}
 }
 
-setupCards(numOfCards);
-/*if(firstCard == secondCard)
+function isTwoCards()
 {
-	alert("You found a match!");
+	cardsInPlay.push(this.getAttribute('data-card'));
+
+	if(this.getAttribute('data-card') == 'king')
+	{
+		this.innerHTML = '<img class="cardImage" src="images/king.png" alt=""King of Spades">';
+	}
+	else if(this.getAttribute('data-card') == 'queen')
+	{
+		this.innerHTML = '<img class="cardImage" src="images/queen.png" alt="Queen of Spades">';
+	}
+
+	if(cardsInPlay.length === 2)
+	{
+		isMatch(cardsInPlay);
+
+		var allCards = document.querySelectorAll(".card");
+
+
+		console.log(allCards.length);
+
+		for(var i=0;i<allCards.length; i++)
+		{
+			allCards[i].innerHTML = "";
+		}
+
+		cardsInPlay = [];
+	}
 }
-else
+
+function isMatch(x)
 {
-	alert("Sorry, try again.");
-}*/
+	if(x[0] == x[1])
+	{
+		alert("You found a match!");
+	}
+	else
+	{
+		alert("Sorry, try again.");
+	}
+}
+createBoard(cards.length);

@@ -51,7 +51,7 @@ p
 	width: 50%;
 	display: inline-block;
 }
-.card
+.card, .cardImage
 {
 	background: yellow;
 	width: 150px;
